@@ -1,0 +1,2254 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Holiday Mortgage Calculator</title>
+  <script type='text/javascript' src='https://bw700hgd4vxwjk4h.canvacode.com/lgtFl9ehjLq3RgLZ-A32pcdsT57VyvJD6Whmfrng9sCI9KVpyXuUEReAJuW0xb9a1do-DIeU_MszLzDUgYLGsrkV5wsmJKm_JaAy9FbXakxuGdlg-xLffo_eeJxOdP_WlcF9NrLx6qU7nvCnR7sstSV3MzAJkkPOzYMo9M_AXik='></script><script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: 
+        radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.8) 0%, transparent 60%),
+        radial-gradient(ellipse at bottom right, rgba(212, 175, 55, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at center, rgba(16, 120, 85, 0.05) 0%, transparent 70%),
+        linear-gradient(180deg, #fdfcfb 0%, #ffffff 30%, #fef9f3 60%, #fffbf7 100%);
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      position: relative;
+    }
+    
+    html {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Soft snow texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 1%),
+        radial-gradient(circle at 70% 50%, rgba(255, 255, 255, 0.4) 0%, transparent 1%),
+        radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.5) 0%, transparent 1%),
+        radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 1%);
+      background-size: 200px 200px, 300px 300px, 250px 250px, 180px 180px;
+      pointer-events: none;
+      opacity: 0.4;
+      z-index: 1;
+    }
+
+    /* Gentle floating snowflakes */
+    @keyframes snowfall {
+      0% {
+        transform: translateY(-100%) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+      }
+      90% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(100%) translateX(50px) rotate(180deg);
+        opacity: 0;
+      }
+    }
+
+    .snowflake {
+      position: fixed;
+      top: -10%;
+      color: rgba(212, 175, 55, 0.3);
+      font-size: 1.2rem;
+      pointer-events: none;
+      z-index: 100;
+      animation: snowfall linear infinite;
+      filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+    }
+
+    .snowflake:nth-child(1) { left: 10%; animation-duration: 15s; animation-delay: 0s; font-size: 1rem; }
+    .snowflake:nth-child(2) { left: 25%; animation-duration: 18s; animation-delay: 3s; font-size: 1.4rem; }
+    .snowflake:nth-child(3) { left: 40%; animation-duration: 16s; animation-delay: 6s; font-size: 1.1rem; }
+    .snowflake:nth-child(4) { left: 55%; animation-duration: 17s; animation-delay: 2s; font-size: 1.3rem; }
+    .snowflake:nth-child(5) { left: 70%; animation-duration: 19s; animation-delay: 5s; font-size: 1.2rem; }
+    .snowflake:nth-child(6) { left: 85%; animation-duration: 16s; animation-delay: 8s; font-size: 1rem; }
+
+
+
+    /* Premium Christmas lights - champagne gold theme */
+    .christmas-lights {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      padding: 0 2rem;
+    }
+
+    .christmas-lights::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, 
+        rgba(212, 175, 55, 0.3) 0%, 
+        rgba(212, 175, 55, 0.6) 50%, 
+        rgba(212, 175, 55, 0.3) 100%);
+      box-shadow: 0 1px 3px rgba(212, 175, 55, 0.2);
+    }
+
+    .light {
+      width: 14px;
+      height: 16px;
+      border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+      position: relative;
+    }
+
+    .light::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1.5px;
+      height: 8px;
+      background: rgba(212, 175, 55, 0.4);
+    }
+
+    .light:nth-child(1) { margin-top: 5px; }
+    .light:nth-child(2) { margin-top: 12px; }
+    .light:nth-child(3) { margin-top: 18px; }
+    .light:nth-child(4) { margin-top: 20px; }
+    .light:nth-child(5) { margin-top: 18px; }
+    .light:nth-child(6) { margin-top: 12px; }
+    .light:nth-child(7) { margin-top: 5px; }
+    .light:nth-child(8) { margin-top: 12px; }
+    .light:nth-child(9) { margin-top: 18px; }
+    .light:nth-child(10) { margin-top: 20px; }
+    .light:nth-child(11) { margin-top: 18px; }
+    .light:nth-child(12) { margin-top: 12px; }
+
+    .light:nth-child(3n+1) {
+      background: radial-gradient(circle, #f4d03f, #d4af37);
+      box-shadow: 0 0 20px rgba(244, 208, 63, 0.9), 0 0 8px rgba(212, 175, 55, 0.7), 0 2px 4px rgba(0, 0, 0, 0.1);
+      animation: gentleTwinkle 3s ease-in-out infinite;
+      animation-delay: 0s;
+    }
+
+    .light:nth-child(3n+2) {
+      background: radial-gradient(circle, #14b878, #107855);
+      box-shadow: 0 0 20px rgba(20, 184, 120, 0.9), 0 0 8px rgba(16, 120, 85, 0.7), 0 2px 4px rgba(0, 0, 0, 0.1);
+      animation: gentleTwinkle 3s ease-in-out infinite;
+      animation-delay: 1s;
+    }
+
+    .light:nth-child(3n+3) {
+      background: radial-gradient(circle, #ff4444, #dc2626);
+      box-shadow: 0 0 20px rgba(255, 68, 68, 0.95), 0 0 8px rgba(220, 38, 38, 0.8), 0 2px 4px rgba(0, 0, 0, 0.1);
+      animation: gentleTwinkle 3s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+
+    @keyframes gentleTwinkle {
+      0%, 100% { opacity: 1; filter: brightness(1.1); }
+      50% { opacity: 0.7; filter: brightness(0.9); }
+    }
+
+    .app-wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 4rem;
+    }
+
+    /* Elegant frosted header */
+    .header-section {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      padding: 3.5rem 3rem;
+      background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+      backdrop-filter: blur(40px) saturate(180%);
+      border-radius: 2rem;
+      border: 2px solid rgba(212, 175, 55, 0.2);
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.8) inset,
+        0 8px 32px rgba(212, 175, 55, 0.15);
+      overflow: hidden;
+    }
+
+    /* Soft gold glow at top */
+    .header-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: radial-gradient(ellipse at top, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .holiday-accent {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 75px;
+      height: 75px;
+      margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.1) 100%);
+      border-radius: 50%;
+      box-shadow: 
+        0 8px 24px rgba(212, 175, 55, 0.2),
+        0 0 0 3px rgba(255, 255, 255, 0.5),
+        0 0 0 6px rgba(212, 175, 55, 0.15);
+      font-size: 2.5rem;
+      position: relative;
+      z-index: 1;
+      border: 2px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .main-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #107855 0%, #0d6847 50%, #107855 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 2px 8px rgba(16, 120, 85, 0.15));
+    }
+
+    .tagline {
+      font-size: 1.125rem;
+      color: #5a5a5a;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 0.01em;
+      line-height: 1.6;
+      max-width: 650px;
+      margin: 0 auto 0.875rem;
+    }
+
+    .credibility-line {
+      font-size: 0.875rem;
+      color: #888888;
+      font-weight: 500;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 0.01em;
+      margin-bottom: 1.75rem;
+    }
+
+    .trust-badges-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .trust-badge-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: #6a6a6a;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 0.5rem 0.875rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .trust-badge-item:hover {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: rgba(212, 175, 55, 0.25);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .trust-icon {
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+
+    .trust-text {
+      white-space: nowrap;
+    }
+
+    /* Premium frosted calculator card */
+    .calculator-card {
+      background: 
+        linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 100%);
+      backdrop-filter: blur(50px) saturate(180%);
+      border-radius: 2rem;
+      padding: 3.5rem 3rem;
+      box-shadow: 
+        0 25px 80px rgba(0, 0, 0, 0.06),
+        0 0 0 1px rgba(255, 255, 255, 0.9) inset,
+        0 10px 40px rgba(212, 175, 55, 0.12);
+      border: 2px solid rgba(212, 175, 55, 0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Elegant gold ribbon */
+    .calculator-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 180px;
+      height: 4px;
+      background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(212, 175, 55, 0.4) 20%, 
+        rgba(212, 175, 55, 0.7) 50%,
+        rgba(212, 175, 55, 0.4) 80%,
+        transparent 100%
+      );
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 2px 12px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Subtle snowflake pattern */
+    .calculator-card::after {
+      content: '❄️';
+      position: absolute;
+      bottom: 2rem;
+      right: 2.5rem;
+      font-size: 3rem;
+      opacity: 0.06;
+      transform: rotate(15deg);
+    }
+
+    /* Section styling */
+    .form-section {
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-section:last-of-type {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.15);
+      position: relative;
+    }
+
+    /* Elegant section icon */
+    .section-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(212, 175, 55, 0.06) 100%);
+      border-radius: 12px;
+      border: 1.5px solid rgba(212, 175, 55, 0.25);
+      box-shadow: 
+        0 4px 12px rgba(212, 175, 55, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2d2d2d;
+      letter-spacing: -0.01em;
+    }
+
+    /* Input styling */
+    .input-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.75rem;
+    }
+
+    .input-grid-full {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+
+    @media (max-width: 640px) {
+      .input-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-label {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #3a3a3a;
+      margin-bottom: 0.625rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* Elegant frosted input fields */
+    .input-field {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #2d2d2d;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid rgba(212, 175, 55, 0.2);
+      border-radius: 0.875rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Inter', sans-serif;
+      box-shadow: 
+        inset 0 1px 3px rgba(0, 0, 0, 0.05),
+        0 2px 8px rgba(0, 0, 0, 0.03);
+      backdrop-filter: blur(10px);
+    }
+
+    .input-field:hover {
+      background: rgba(255, 255, 255, 0.85);
+      border-color: rgba(212, 175, 55, 0.4);
+      box-shadow: 
+        inset 0 1px 3px rgba(0, 0, 0, 0.05),
+        0 4px 12px rgba(212, 175, 55, 0.15);
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: rgba(212, 175, 55, 0.6);
+      box-shadow: 
+        0 0 0 3px rgba(212, 175, 55, 0.15), 
+        inset 0 1px 3px rgba(0, 0, 0, 0.05),
+        0 6px 16px rgba(212, 175, 55, 0.2);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .input-field::placeholder {
+      color: rgba(0, 0, 0, 0.3);
+      font-weight: 400;
+    }
+
+    .helper-text {
+      font-size: 0.8125rem;
+      color: #6a6a6a;
+      margin-top: 0.625rem;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.375rem;
+    }
+
+    .helper-text::before {
+      content: '→';
+      font-style: normal;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+      color: rgba(212, 175, 55, 0.7);
+    }
+
+    /* Premium Gift Box Results Card */
+    .results-card {
+      margin-top: 3rem;
+      padding: 0;
+      position: relative;
+      border-radius: 1.75rem;
+      overflow: visible;
+    }
+
+    /* Gift box wrapper with luxury border */
+    .gift-box-wrapper {
+      position: relative;
+      padding: 4.5rem 3rem 3.5rem;
+      background: 
+        linear-gradient(135deg, rgba(16, 120, 85, 0.95) 0%, rgba(13, 104, 71, 0.98) 100%);
+      border-radius: 1.75rem;
+      /* Premium gold border with depth */
+      border: 3px solid;
+      border-image: linear-gradient(
+        135deg,
+        rgba(212, 175, 55, 0.5) 0%,
+        rgba(230, 190, 70, 0.6) 25%,
+        rgba(240, 200, 80, 0.7) 50%,
+        rgba(230, 190, 70, 0.6) 75%,
+        rgba(212, 175, 55, 0.5) 100%
+      ) 1;
+      box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.12),
+        0 8px 24px rgba(212, 175, 55, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        inset 0 0 60px rgba(212, 175, 55, 0.05),
+        0 0 0 1px rgba(212, 175, 55, 0.15),
+        0 2px 8px rgba(212, 175, 55, 0.12);
+      backdrop-filter: blur(40px);
+      overflow: visible;
+    }
+
+    /* Subtle festive wrapping paper texture */
+    .gift-box-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 40px,
+          rgba(212, 175, 55, 0.015) 40px,
+          rgba(212, 175, 55, 0.015) 42px
+        ),
+        repeating-linear-gradient(
+          -45deg,
+          transparent,
+          transparent 40px,
+          rgba(220, 38, 38, 0.01) 40px,
+          rgba(220, 38, 38, 0.01) 42px
+        ),
+        radial-gradient(ellipse at top left, rgba(212, 175, 55, 0.08) 0%, transparent 45%),
+        radial-gradient(ellipse at top right, rgba(220, 38, 38, 0.05) 0%, transparent 45%),
+        radial-gradient(ellipse at bottom center, rgba(212, 175, 55, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Soft snowflake texture overlay */
+    .gift-box-wrapper::after {
+      content: '❄';
+      position: absolute;
+      bottom: 2rem;
+      right: 2.5rem;
+      font-size: 8rem;
+      opacity: 0.02;
+      pointer-events: none;
+      z-index: 0;
+      color: #107855;
+      transform: rotate(-15deg);
+    }
+
+    /* Shimmer effect for calculating state */
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .results-card.calculating .gift-box-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        transparent 100%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1s ease-in-out;
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    .results-content {
+      position: relative;
+      z-index: 3;
+      transition: opacity 0.25s ease;
+    }
+
+    .results-card.calculating .results-content {
+      opacity: 0.5;
+    }
+
+    .results-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      z-index: 3;
+    }
+
+    .results-label {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .results-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #d4af37 0%, #c9a642 50%, #d4af37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+      filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.2));
+    }
+
+    .results-breakdown {
+      display: grid;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 3;
+    }
+
+    .breakdown-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .breakdown-label {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .breakdown-value {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .results-summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      z-index: 3;
+    }
+
+    .summary-item {
+      text-align: center;
+    }
+
+    .summary-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .summary-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #d4af37;
+    }
+
+    /* PMI Notice - soft amber styling */
+    .pmi-notice {
+      margin-top: 2rem;
+      padding: 1.5rem 1.75rem;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+      border-left: 4px solid rgba(245, 158, 11, 0.5);
+      border-radius: 1rem;
+      font-size: 0.9375rem;
+      color: #4a4a4a;
+      line-height: 1.7;
+      display: none;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+
+    .pmi-notice-title {
+      font-weight: 700;
+      color: #2d2d2d;
+      margin-bottom: 0.625rem;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: 1rem;
+    }
+
+    /* Lead Capture Section */
+    .lead-capture-section {
+      margin-top: 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .lead-capture-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 252, 255, 0.95) 100%);
+      border-radius: 1.75rem;
+      padding: 0;
+      border: 2px solid rgba(16, 120, 85, 0.15);
+      box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.9) inset,
+        0 8px 24px rgba(16, 120, 85, 0.12);
+      backdrop-filter: blur(30px);
+      overflow: hidden;
+    }
+
+    .lead-capture-header {
+      background: linear-gradient(135deg, rgba(16, 120, 85, 0.08) 0%, rgba(16, 120, 85, 0.04) 100%);
+      padding: 2rem 2.5rem;
+      border-bottom: 2px solid rgba(16, 120, 85, 0.1);
+    }
+
+    .loan-officer-profile {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .officer-headshot {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid rgba(16, 120, 85, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      flex-shrink: 0;
+    }
+    .officer-headshot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .officer-headshot svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .officer-info {
+      flex: 1;
+    }
+
+    .officer-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #107855;
+      margin-bottom: 0.25rem;
+    }
+
+    .officer-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #4a4a4a;
+      margin-bottom: 0.25rem;
+    }
+
+    .officer-nmls {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: #6a6a6a;
+    }
+
+    .lead-capture-content {
+      padding: 2.5rem 2.5rem 2.75rem;
+    }
+
+    .lead-capture-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #2d2d2d;
+      margin-bottom: 1rem;
+      text-align: center;
+      letter-spacing: -0.01em;
+    }
+
+    .lead-capture-subtext {
+      font-size: 1rem;
+      color: #5a5a5a;
+      line-height: 1.7;
+      text-align: center;
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: #4a4a4a;
+      font-weight: 500;
+    }
+
+    .badge-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, rgba(16, 120, 85, 0.15) 0%, rgba(16, 120, 85, 0.08) 100%);
+      border-radius: 50%;
+      color: #107855;
+      font-weight: 700;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .lead-form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .form-row {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-label {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #3a3a3a;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .form-input,
+    .form-select {
+      width: 100%;
+      padding: 0.875rem 1.125rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #2d2d2d;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1.5px solid rgba(16, 120, 85, 0.2);
+      border-radius: 0.75rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Inter', sans-serif;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-input:hover,
+    .form-select:hover {
+      background: rgba(255, 255, 255, 0.95);
+      border-color: rgba(16, 120, 85, 0.35);
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: rgba(16, 120, 85, 0.6);
+      box-shadow: 
+        0 0 0 3px rgba(16, 120, 85, 0.1), 
+        inset 0 1px 3px rgba(0, 0, 0, 0.05);
+      background: #ffffff;
+    }
+
+    .form-input::placeholder {
+      color: rgba(0, 0, 0, 0.3);
+      font-weight: 400;
+    }
+
+    .form-select {
+      cursor: pointer;
+    }
+
+    .lead-submit-btn {
+      width: 100%;
+      padding: 1.125rem 2rem;
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(135deg, #107855 0%, #0d6847 100%);
+      border: none;
+      border-radius: 0.875rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Inter', sans-serif;
+      box-shadow: 
+        0 4px 12px rgba(16, 120, 85, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.1);
+      letter-spacing: -0.01em;
+      margin-top: 0.5rem;
+    }
+
+    .lead-submit-btn:hover {
+      background: linear-gradient(135deg, #0d6847 0%, #0a5238 100%);
+      box-shadow: 
+        0 6px 16px rgba(16, 120, 85, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .lead-submit-btn:active {
+      transform: translateY(0);
+      box-shadow: 
+        0 2px 8px rgba(16, 120, 85, 0.3),
+        0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-success-message {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(16, 120, 85, 0.1) 0%, rgba(16, 120, 85, 0.05) 100%);
+      border-radius: 1rem;
+      border: 2px solid rgba(16, 120, 85, 0.2);
+      margin-top: 1.5rem;
+    }
+
+    .form-success-message.show {
+      display: block;
+    }
+
+    .success-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #107855 0%, #0d6847 100%);
+      border-radius: 50%;
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 12px rgba(16, 120, 85, 0.3);
+    }
+
+    .success-text {
+      font-size: 1rem;
+      color: #2d2d2d;
+      line-height: 1.6;
+    }
+
+    .success-text strong {
+      display: block;
+      font-size: 1.125rem;
+      color: #107855;
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .lead-capture-header {
+        padding: 1.75rem 1.5rem;
+      }
+
+      .loan-officer-profile {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .officer-headshot {
+        margin: 0 auto;
+      }
+
+      .lead-capture-content {
+        padding: 2rem 1.5rem 2.25rem;
+      }
+
+      .lead-capture-title {
+        font-size: 1.5rem;
+      }
+
+      .trust-badges {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+    }
+
+    /* Footer - elegant frosted */
+    .calculator-footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.875rem;
+      color: #6a6a6a;
+      line-height: 1.8;
+      padding: 2rem 2.5rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
+      backdrop-filter: blur(30px);
+      border-radius: 1.5rem;
+      border: 1.5px solid rgba(212, 175, 55, 0.15);
+      box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.05),
+        0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+    }
+
+    /* Floating contact button for mobile */
+    .floating-contact-kelly {
+      position: fixed;
+      right: 1.25rem;
+      bottom: 1.25rem;
+      z-index: 50;
+      pointer-events: none;
+    }
+
+    .floating-contact-kelly-btn {
+      pointer-events: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #107855 0%, #0d6847 100%);
+      color: #ffffff;
+      text-decoration: none;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Mobile only */
+    @media (min-width: 769px) {
+      .floating-contact-kelly {
+        display: none;
+      }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .app-wrapper {
+        padding: 2rem 1rem 2.5rem;
+      }
+
+      .header-section {
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .holiday-accent {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .main-title {
+        font-size: 1.75rem;
+        line-height: 1.2;
+      }
+
+      .tagline {
+        font-size: 0.9375rem;
+        line-height: 1.5;
+        margin-bottom: 0.75rem;
+      }
+
+      .credibility-line {
+        font-size: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .trust-badges-header {
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .trust-badge-item {
+        font-size: 0.6875rem;
+        padding: 0.375rem 0.625rem;
+        gap: 0.375rem;
+      }
+
+      .trust-icon {
+        font-size: 0.75rem;
+      }
+
+      .calculator-card {
+        padding: 2rem 1.25rem;
+        border-radius: 1.5rem;
+      }
+
+      .form-section {
+        margin-bottom: 2rem;
+      }
+
+      .form-section:last-of-type {
+        margin-bottom: 2rem;
+      }
+
+      .section-header {
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        gap: 0.75rem;
+      }
+
+      .section-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1.25rem;
+        border-radius: 10px;
+      }
+
+      .section-title {
+        font-size: 1.125rem;
+      }
+
+      .input-grid,
+      .input-grid-full {
+        gap: 1.25rem;
+      }
+
+      .input-label {
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .input-field {
+        padding: 0.875rem 1rem;
+        font-size: 0.9375rem;
+        border-radius: 0.75rem;
+      }
+
+      .helper-text {
+        font-size: 0.75rem;
+        margin-top: 0.5rem;
+      }
+
+      .results-card {
+        margin-top: 2rem;
+      }
+
+      .gift-box-wrapper {
+        padding: 3.5rem 1.5rem 2.5rem;
+        border-radius: 1.5rem;
+      }
+
+      .real-bow {
+        width: 140px;
+        height: 70px;
+        top: -18px;
+      }
+
+      .real-bow::before,
+      .real-bow::after {
+        width: 50px;
+        height: 50px;
+        top: 6px;
+      }
+
+      .real-bow-loop {
+        width: 55px;
+        height: 55px;
+      }
+
+      .real-bow-left {
+        left: 8px;
+      }
+
+      .real-bow-right {
+        right: 8px;
+      }
+
+      .real-bow-knot {
+        width: 38px;
+        height: 40px;
+        top: 18px;
+      }
+
+      .real-bow-knot::before,
+      .real-bow-knot::after {
+        width: 15px;
+        height: 32px;
+        top: 35px;
+      }
+
+      .gift-box-wrapper::after {
+        font-size: 5rem;
+        bottom: 1.5rem;
+        right: 1.5rem;
+      }
+
+      .results-header {
+        margin-bottom: 2rem;
+        padding-bottom: 1.25rem;
+      }
+
+      .results-label {
+        font-size: 0.875rem;
+        margin-bottom: 0.625rem;
+      }
+
+      .results-amount {
+        font-size: 2.5rem;
+        line-height: 1.1;
+      }
+
+      .results-breakdown {
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .breakdown-item {
+        padding: 0.875rem 1.125rem;
+        border-radius: 0.625rem;
+      }
+
+      .breakdown-label {
+        font-size: 0.875rem;
+      }
+
+      .breakdown-value {
+        font-size: 1rem;
+      }
+
+      .results-summary {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        padding-top: 1.25rem;
+      }
+
+      .summary-label {
+        font-size: 0.75rem;
+        margin-bottom: 0.375rem;
+      }
+
+      .summary-value {
+        font-size: 1.125rem;
+      }
+
+      .pmi-notice {
+        margin-top: 1.5rem;
+        padding: 1.25rem 1.25rem;
+        font-size: 0.875rem;
+        border-radius: 0.875rem;
+      }
+
+      .pmi-notice-title {
+        font-size: 0.9375rem;
+        margin-bottom: 0.5rem;
+        gap: 0.5rem;
+      }
+
+      .lead-capture-section {
+        margin-top: 2rem;
+      }
+
+      .lead-capture-card {
+        border-radius: 1.5rem;
+      }
+
+      .lead-capture-header {
+        padding: 1.5rem 1.25rem;
+      }
+
+      .officer-headshot {
+        width: 60px;
+        height: 60px;
+        border-width: 2px;
+      }
+
+      .officer-name {
+        font-size: 1.25rem;
+      }
+
+      .officer-title {
+        font-size: 0.875rem;
+      }
+
+      .officer-nmls {
+        font-size: 0.75rem;
+      }
+
+      .lead-capture-content {
+        padding: 2rem 1.25rem 2rem;
+      }
+
+      .lead-capture-title {
+        font-size: 1.375rem;
+        margin-bottom: 0.875rem;
+        line-height: 1.3;
+      }
+
+      .lead-capture-subtext {
+        font-size: 0.9375rem;
+        line-height: 1.6;
+        margin-bottom: 1.75rem;
+      }
+
+      .trust-badges {
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .trust-badge {
+        font-size: 0.8125rem;
+        gap: 0.5rem;
+      }
+
+      .badge-icon {
+        width: 20px;
+        height: 20px;
+        font-size: 0.6875rem;
+      }
+
+      .form-row {
+        margin-bottom: 1.25rem;
+      }
+
+      .form-label {
+        font-size: 0.875rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .form-input,
+      .form-select {
+        padding: 0.8125rem 1rem;
+        font-size: 0.9375rem;
+        border-radius: 0.625rem;
+      }
+
+      .lead-submit-btn {
+        padding: 1rem 1.75rem;
+        font-size: 1rem;
+        border-radius: 0.75rem;
+        margin-top: 0.375rem;
+      }
+
+      .form-success-message {
+        padding: 1.75rem 1.25rem;
+        margin-top: 1.25rem;
+        border-radius: 0.875rem;
+      }
+
+      .success-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.25rem;
+        margin-bottom: 0.875rem;
+      }
+
+      .success-text {
+        font-size: 0.9375rem;
+      }
+
+      .success-text strong {
+        font-size: 1.0625rem;
+        margin-bottom: 0.4rem;
+      }
+
+      .calculator-footer {
+        margin-top: 2rem;
+        font-size: 0.8125rem;
+        padding: 1.5rem 1.25rem;
+        border-radius: 1.25rem;
+        line-height: 1.7;
+      }
+
+      .christmas-lights {
+        padding: 0 0.5rem;
+        height: 30px;
+      }
+
+      .light {
+        width: 11px;
+        height: 13px;
+      }
+
+      .light::before {
+        width: 1px;
+        height: 6px;
+        top: -6px;
+      }
+
+      .light:nth-child(1) { margin-top: 4px; }
+      .light:nth-child(2) { margin-top: 9px; }
+      .light:nth-child(3) { margin-top: 13px; }
+      .light:nth-child(4) { margin-top: 15px; }
+      .light:nth-child(5) { margin-top: 13px; }
+      .light:nth-child(6) { margin-top: 9px; }
+      .light:nth-child(7) { margin-top: 4px; }
+      .light:nth-child(8) { margin-top: 9px; }
+      .light:nth-child(9) { margin-top: 13px; }
+      .light:nth-child(10) { margin-top: 15px; }
+      .light:nth-child(11) { margin-top: 13px; }
+      .light:nth-child(12) { margin-top: 9px; }
+
+      .snowflake {
+        font-size: 0.875rem;
+      }
+    }
+
+/* --- GIFT RIBBON + REALISTIC BOW --- */
+.gift-box-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.gift-ribbon-horizontal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 42px;
+  background: linear-gradient(180deg,#f97373 0%,#ef4444 45%,#b91c1c 100%);
+  border-radius: 1.5rem 1.5rem 0 0;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.55),
+    inset 0 -3px 4px rgba(0,0,0,.35);
+  z-index: 1;
+}
+.gift-ribbon-vertical {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  background: linear-gradient(180deg,#b91c1c 0%,#ef4444 40%,#b91c1c 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.4),
+    0 0 10px rgba(0,0,0,.2);
+  z-index: 0;
+}
+
+/* --- Realistic 3D Gift Bow --- */
+.real-bow {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 90px;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* Back loops (behind center knot) */
+.real-bow::before,
+.real-bow::after {
+  content: '';
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  background: linear-gradient(145deg, #ff5252 0%, #d32f2f 50%, #b71c1c 100%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 
+    inset 2px 2px 6px rgba(255, 255, 255, 0.4),
+    inset -3px -3px 8px rgba(0, 0, 0, 0.4),
+    2px 4px 8px rgba(0, 0, 0, 0.3);
+  top: 8px;
+}
+
+.real-bow::before {
+  left: 0;
+  transform: rotate(-35deg) skewY(8deg);
+}
+
+.real-bow::after {
+  right: 0;
+  transform: rotate(35deg) skewY(-8deg);
+}
+
+/* Front loops */
+.real-bow-loop {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #e53935 45%, #c62828 100%);
+  border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
+  box-shadow: 
+    inset 3px 3px 8px rgba(255, 255, 255, 0.5),
+    inset -4px -4px 10px rgba(0, 0, 0, 0.4),
+    3px 6px 12px rgba(0, 0, 0, 0.35);
+  top: 0;
+}
+
+.real-bow-left {
+  left: 10px;
+  transform: rotate(-25deg) skewY(5deg);
+}
+
+.real-bow-right {
+  right: 10px;
+  transform: rotate(25deg) skewY(-5deg);
+}
+
+/* Center knot */
+.real-bow-knot {
+  position: absolute;
+  width: 45px;
+  height: 48px;
+  background: linear-gradient(135deg, #ff8a80 0%, #ff5252 35%, #d32f2f 100%);
+  border-radius: 50% / 45%;
+  left: 50%;
+  top: 22px;
+  transform: translateX(-50%);
+  box-shadow: 
+    inset 2px 2px 5px rgba(255, 255, 255, 0.6),
+    inset -3px -3px 7px rgba(0, 0, 0, 0.4),
+    0 4px 10px rgba(0, 0, 0, 0.4);
+  z-index: 5;
+}
+
+/* Ribbon tails hanging down */
+.real-bow-knot::before,
+.real-bow-knot::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 40px;
+  background: linear-gradient(180deg, #ff5252 0%, #e53935 50%, #c62828 100%);
+  top: 40px;
+  box-shadow: 
+    inset 1px 0 3px rgba(255, 255, 255, 0.3),
+    inset -1px 0 3px rgba(0, 0, 0, 0.3),
+    2px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.real-bow-knot::before {
+  left: 5px;
+  transform: rotate(-12deg);
+  clip-path: polygon(50% 0%, 0% 0%, 30% 100%, 70% 100%);
+}
+
+.real-bow-knot::after {
+  right: 5px;
+  transform: rotate(12deg);
+  clip-path: polygon(50% 0%, 100% 0%, 70% 100%, 30% 100%);
+}
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Gentle floating snowflakes -->
+  <div class="snowflake">
+      
+  </div>
+  <div class="snowflake">
+   ❄
+  </div>
+  <div class="snowflake">
+   ❄
+  </div>
+  <div class="snowflake">
+   ❄
+  </div>
+  <div class="snowflake">
+   ❄
+  </div>
+  <div class="snowflake">
+   ❄
+  </div><!-- Elegant Christmas lights -->
+  <div class="christmas-lights">
+   <div class="light"></div>
+   <div class="light"></div>
+   <div class="light"></div>
+   <div class="light"></div>
+   <div class="light"></div>
+   <div class="light"></div>
+   <div class="light"></div>
+   <div class="light"></div>
+   <div class="light"></div>
+   <div class="light"></div>
+   <div class="light"></div>
+   <div class="light"></div>
+  </div>
+  <div class="app-wrapper"><!-- Header -->
+   <header class="header-section">
+    <h1 class="main-title" id="main-title">Holiday Home Budget Check</h1>
+    <p class="tagline" id="tagline">Get a quick holiday estimate of how much home you can afford — no credit check required.</p>
+    <p class="credibility-line">Presented by Kelly Bergman, Licensed Mortgage Loan Officer (NMLS 1786042)</p><!-- Trust badges -->
+    <div class="trust-badges-header">
+     <div class="trust-badge-item"><span class="trust-icon">🔒</span> <span class="trust-text">Secure estimate</span>
+     </div>
+     <div class="trust-badge-item"><span class="trust-icon">✓</span> <span class="trust-text">No credit check needed</span>
+     </div>
+     <div class="trust-badge-item"><span class="trust-icon">🛡️</span> <span class="trust-text">Private &amp; confidential</span>
+     </div>
+     <div class="trust-badge-item"><span class="trust-icon">⚡</span> <span class="trust-text">Takes less than 1 minute</span>
+     </div>
+    </div>
+   </header><!-- Main Calculator Card -->
+   <main class="calculator-card"><!-- Income Section -->
+    <section class="form-section">
+     <div class="section-header"><span class="section-icon">💰</span>
+      <h2 class="section-title">Your Income</h2>
+     </div>
+     <div class="input-grid-full">
+      <div class="input-group"><label class="input-label" for="gross-income">Gross Monthly Income</label> <input type="text" id="gross-income" class="input-field" placeholder="$8,500">
+      </div>
+      <div class="input-group"><label class="input-label" for="monthly-debts">Monthly Debt Payments</label> <input type="text" id="monthly-debts" class="input-field" placeholder="$450">
+      </div>
+     </div>
+    </section><!-- Veteran Benefits Section -->
+    <section class="form-section" id="veteran-benefits-section">
+     <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;"><input type="checkbox" id="veteran-toggle" style="width:18px; height:18px; cursor:pointer;"> <label for="veteran-toggle" style="font-size:1rem; font-weight:600; color:#2d2d2d; cursor:pointer;"> Apply Veteran Loan Benefits </label>
+     </div>
+    </section><!-- Property Details Section -->
+    <section class="form-section">
+     <div class="section-header"><span class="section-icon">🏡</span>
+      <h2 class="section-title">Property Details</h2>
+     </div>
+     <div class="input-grid">
+      <div class="input-group"><label class="input-label" for="home-price">Home Price</label> <input type="text" id="home-price" class="input-field" placeholder="$450,000">
+      </div>
+      <div class="input-group"><label class="input-label" for="down-payment">Down Payment</label> <input type="text" id="down-payment" class="input-field" placeholder="$90,000">
+      </div>
+     </div>
+     <div class="input-grid" style="margin-top: 1.75rem;">
+      <div class="input-group"><label class="input-label" for="interest-rate">Interest Rate (%)</label> <input type="text" id="interest-rate" class="input-field" placeholder="6.5">
+      </div>
+      <div class="input-group"><label class="input-label" for="loan-term">Loan Term (years)</label> <input type="text" id="loan-term" class="input-field" placeholder="30">
+      </div>
+     </div>
+    </section><!-- Additional Costs Section -->
+    <section class="form-section">
+     <div class="section-header"><span class="section-icon">📊</span>
+      <h2 class="section-title">Additional Costs</h2>
+     </div>
+     <div class="input-grid">
+      <div class="input-group"><label class="input-label" for="property-taxes">Annual Property Taxes</label> <input type="text" id="property-taxes" class="input-field" placeholder="$5,400">
+       <div class="helper-text">
+        If left blank, we'll estimate taxes at ~1.9% of the home price.
+       </div>
+      </div>
+      <div class="input-group"><label class="input-label" for="insurance">Annual Homeowners Insurance</label> <input type="text" id="insurance" class="input-field" placeholder="$1,200">
+       <div class="helper-text">
+        If left blank, we'll estimate at ~0.35% of the home price.
+       </div>
+      </div>
+     </div>
+     <div class="input-grid" style="margin-top: 1.75rem;">
+      <div class="input-group"><label class="input-label" for="hoa-dues">Monthly HOA Dues</label> <input type="text" id="hoa-dues" class="input-field" placeholder="$200">
+       <div class="helper-text">
+        Optional. Only needed for condos/townhomes.
+       </div>
+      </div>
+      <div class="input-group"><label class="input-label" for="zip-code">ZIP Code</label> <input type="text" id="zip-code" class="input-field" placeholder="90210">
+      </div>
+     </div>
+    </section><!-- Premium Gift Box Results Card -->
+    <div class="results-card" id="results-card">
+     <div class="gift-box-wrapper">
+      <div class="gift-ribbon-horizontal"></div>
+      <div class="gift-ribbon-vertical"></div>
+      <div class="real-bow">
+       <div class="real-bow-loop real-bow-left"></div>
+       <div class="real-bow-loop real-bow-right"></div>
+       <div class="real-bow-knot"></div>
+      </div><!-- Results content inside the "gift box" -->
+      <div class="results-content">
+       <div class="results-header">
+        <div class="results-label">
+         Estimated Monthly Payment
+        </div>
+        <div class="results-amount" id="total-payment">
+         $0
+        </div>
+       </div>
+       <div class="results-breakdown">
+        <div class="breakdown-item"><span class="breakdown-label">Principal &amp; Interest</span> <span class="breakdown-value" id="principal-interest">$0</span>
+        </div>
+        <div class="breakdown-item"><span class="breakdown-label">Property Taxes</span> <span class="breakdown-value" id="monthly-taxes">$0</span>
+        </div>
+        <div class="breakdown-item"><span class="breakdown-label">Homeowners Insurance</span> <span class="breakdown-value" id="monthly-insurance">$0</span>
+        </div>
+        <div class="breakdown-item"><span class="breakdown-label">HOA Dues</span> <span class="breakdown-value" id="monthly-hoa">$0</span>
+        </div>
+       </div>
+       <div class="results-summary">
+        <div class="summary-item">
+         <div class="summary-label">
+          Loan Amount
+         </div>
+         <div class="summary-value" id="loan-amount">
+          $0
+         </div>
+        </div>
+        <div class="summary-item">
+         <div class="summary-label">
+          Down Payment
+         </div>
+         <div class="summary-value" id="down-payment-percent">
+          0%
+         </div>
+        </div>
+       </div>
+       <div class="results-summary" style="margin-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 1.25rem;">
+        <div class="summary-item">
+         <div class="summary-label">
+          Housing DTI (Front-End)
+         </div>
+         <div class="summary-value" id="front-dti">
+          0%
+         </div>
+        </div>
+        <div class="summary-item">
+         <div class="summary-label">
+          Total DTI (Back-End)
+         </div>
+         <div class="summary-value" id="back-dti">
+          0%
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div><!-- PMI Notice (shown conditionally) -->
+    <div class="pmi-notice" id="pmi-notice">
+     <div class="pmi-notice-title"><span>⚠️</span> <span>About Mortgage Insurance (PMI)</span>
+     </div>
+     <div>
+      Because your down payment is below 20%, your lender may require PMI, which could increase the payment. Your loan officer can give an exact amount.
+     </div>
+    </div><!-- Lead Capture Section -->
+    <section class="lead-capture-section">
+     <div class="lead-capture-card"><!-- Header with Kelly's info -->
+      <div class="lead-capture-header">
+       <div class="loan-officer-profile">
+        <div class="officer-headshot">
+         <img src="kelly-headshot.jpg" alt="Kelly - Mortgage Loan Officer">
+        </div>
+        <div class="officer-info">
+         <div class="officer-name">
+          Kelly
+         </div>
+         <div class="officer-title">
+          Mortgage Loan Officer
+         </div>
+         <div class="officer-nmls">
+          NMLS 1786042
+         </div>
+        </div>
+       </div>
+      </div><!-- Main content -->
+      <div class="lead-capture-content">
+       <h3 class="lead-capture-title">Want a Licensed Loan Officer to Review Your Numbers?</h3>
+       <p class="lead-capture-subtext">If you'd like accurate numbers based on your income, credit, debt, and loan type, enter your contact info below. Kelly will personally run your file and explain your real options. No pressure, no obligations.</p><!-- Trust badges -->
+       <div class="trust-badges">
+        <div class="trust-badge"><span class="badge-icon">✓</span> <span class="badge-text">No spam</span>
+        </div>
+        <div class="trust-badge"><span class="badge-icon">✓</span> <span class="badge-text">No credit pull required</span>
+        </div>
+        <div class="trust-badge"><span class="badge-icon">   </span> <span class="badge-text">Fast responses</span>
+        </div>
+       </div><!-- Lead form -->
+       <form class="lead-form" id="lead-form">
+        <div class="form-row">
+         <div class="form-field"><label for="lead-name" class="form-label">Full Name</label> <input type="text" id="lead-name" class="form-input" placeholder="John Smith" required>
+         </div>
+        </div>
+        <div class="form-row">
+         <div class="form-field"><label for="lead-email" class="form-label">Email</label> <input type="email" id="lead-email" class="form-input" placeholder="john@example.com" required>
+         </div>
+        </div>
+        <div class="form-row">
+         <div class="form-field"><label for="lead-phone" class="form-label">Phone</label> <input type="tel" id="lead-phone" class="form-input" placeholder="(555) 123-4567" required>
+         </div>
+        </div>
+        <div class="form-row">
+         <div class="form-field"><label for="lead-time" class="form-label">Best Time to Reach You</label> <select id="lead-time" class="form-select" required> <option value="">Select a time...</option> <option value="morning">Morning</option> <option value="afternoon">Afternoon</option> <option value="evening">Evening</option> </select>
+         </div>
+        </div><button type="submit" class="lead-submit-btn"> Have Kelly Review My Numbers </button>
+       </form><!-- Success message (hidden by default) -->
+       <div class="form-success-message" id="success-message">
+        <div class="success-icon">
+         ✓
+        </div>
+        <div class="success-text"><strong>Thank you!</strong> Kelly will review your information and reach out soon.
+        </div>
+       </div><!-- Contact Kelly Section -->
+       <div class="contact-kelly-section" style="margin-top:2rem; text-align:center;">
+        <h4 style="font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:700; color:#107855; margin-bottom:1rem;">Prefer to Reach Kelly Directly?</h4>
+        <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;"><!-- Text Kelly button --> <a href="sms:+19034747570?body=Hi Kelly, I just used your calculator and had a quick question." style="padding:0.9rem 1.5rem; background:#107855; color:white; font-weight:600; border-radius:0.75rem; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.15);"> Text Kelly </a> <!-- Email Kelly button --> <a href="mailto:team@loanswithkb.com" style="padding:0.9rem 1.5rem; background:#dc2626; color:white; font-weight:600; border-radius:0.75rem; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.15);"> Email Kelly </a>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="calculator-footer">
+    This calculator provides estimates for planning purposes only. Actual loan terms may vary based on credit score, property type, and lender requirements. Consult with a licensed mortgage professional for personalized advice.
+   </footer><!-- Floating contact button (mobile only) -->
+   <div class="floating-contact-kelly"><a href="sms:+19034747570?body=Hi Kelly, I just used your home budget tool and had a quick question." class="floating-contact-kelly-btn"> 💬 Text Kelly </a>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Holiday Home Budget Check",
+      tagline: "Plan your perfect home purchase this season",
+      background_light: "#fdfcfb",
+      card_white: "rgba(255, 255, 255, 0.98)",
+      accent_gold: "#d4af37",
+      text_dark: "#2d2d2d",
+      evergreen: "#107855",
+      festive_red: "#dc2626"
+    };
+
+    async function onConfigChange(config) {
+      const mainTitle = config.main_title || defaultConfig.main_title;
+      const tagline = config.tagline || defaultConfig.tagline;
+
+      document.getElementById('main-title').textContent = mainTitle;
+      document.getElementById('tagline').textContent = tagline;
+
+      const bgLight = config.background_light || defaultConfig.background_light;
+      const cardWhite = config.card_white || defaultConfig.card_white;
+      const accentGold = config.accent_gold || defaultConfig.accent_gold;
+      const textDark = config.text_dark || defaultConfig.text_dark;
+      const evergreen = config.evergreen || defaultConfig.evergreen;
+      const festiveRed = config.festive_red || defaultConfig.festive_red;
+
+      document.body.style.background = `
+        radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.8) 0%, transparent 60%),
+        radial-gradient(ellipse at bottom right, ${accentGold}20 0%, transparent 60%),
+        radial-gradient(ellipse at top right, ${festiveRed}08 0%, transparent 50%),
+        linear-gradient(180deg, ${bgLight} 0%, #ffffff 30%, #fef9f3 60%, #fffbf7 100%)
+      `;
+
+      const cards = document.querySelectorAll('.calculator-card, .header-section');
+      cards.forEach(el => {
+        el.style.background = `linear-gradient(135deg, ${cardWhite} 0%, rgba(255, 255, 255, 0.92) 100%)`;
+      });
+
+      document.querySelector('.main-title').style.background = `linear-gradient(135deg, ${evergreen} 0%, ${evergreen}dd 50%, ${evergreen} 100%)`;
+      document.querySelector('.main-title').style.webkitBackgroundClip = 'text';
+      document.querySelector('.main-title').style.backgroundClip = 'text';
+      
+      document.querySelectorAll('.section-title, .input-label').forEach(el => {
+        el.style.color = textDark;
+      });
+
+      document.querySelector('.results-amount').style.background = `linear-gradient(135deg, ${accentGold} 0%, ${accentGold}ee 50%, ${accentGold} 100%)`;
+      document.querySelector('.results-amount').style.webkitBackgroundClip = 'text';
+      document.querySelector('.results-amount').style.backgroundClip = 'text';
+    }
+
+    // Number formatting utilities
+    function formatNumber(value) {
+      const numStr = value.replace(/[^\d]/g, '');
+      if (!numStr) return '';
+      return numStr.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function formatCurrency(value) {
+      const formatted = formatNumber(value);
+      return formatted ? '$' + formatted : '';
+    }
+
+    function unformatNumber(value) {
+      return value.replace(/[^\d.]/g, '');
+    }
+
+    function displayCurrency(amount) {
+      return '$' + Math.round(amount).toLocaleString('en-US');
+    }
+
+    // Mortgage calculation
+    function calculateMortgage(principal, annualRate, years) {
+      if (principal <= 0 || annualRate <= 0 || years <= 0) return 0;
+      
+      const monthlyRate = annualRate / 100 / 12;
+      const numPayments = years * 12;
+      
+      const monthlyPayment = principal * 
+        (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
+        (Math.pow(1 + monthlyRate, numPayments) - 1);
+      
+      return monthlyPayment;
+    }
+
+    // Debounced calculation
+    let calculationTimeout;
+    function scheduleCalculation() {
+      const resultsCard = document.getElementById('results-card');
+      resultsCard.classList.add('calculating');
+      
+      clearTimeout(calculationTimeout);
+      calculationTimeout = setTimeout(() => {
+        performCalculation();
+        setTimeout(() => {
+          resultsCard.classList.remove('calculating');
+        }, 250);
+      }, 300);
+    }
+
+    function performCalculation() {
+      // Get all input values
+      const homePrice = parseFloat(unformatNumber(document.getElementById('home-price').value)) || 0;
+      const downPayment = parseFloat(unformatNumber(document.getElementById('down-payment').value)) || 0;
+      
+      // Use default interest rate of 6.5% if field is blank or invalid
+      const interestRateInput = document.getElementById('interest-rate').value.trim();
+      const interestRate = interestRateInput ? parseFloat(interestRateInput) : 6.5;
+      
+      const loanTerm = parseFloat(document.getElementById('loan-term').value) || 30;
+      
+      let propertyTaxes = parseFloat(unformatNumber(document.getElementById('property-taxes').value));
+      let insurance = parseFloat(unformatNumber(document.getElementById('insurance').value));
+      const hoaDues = parseFloat(unformatNumber(document.getElementById('hoa-dues').value)) || 0;
+
+      // Auto-estimate taxes and insurance if not provided
+      if (!propertyTaxes && homePrice > 0) {
+        propertyTaxes = homePrice * 0.019;
+      } else {
+        propertyTaxes = propertyTaxes || 0;
+      }
+
+      if (!insurance && homePrice > 0) {
+        insurance = homePrice * 0.0035;
+      } else {
+        insurance = insurance || 0;
+      }
+
+      // Check veteran benefits toggle
+      const veteran = document.getElementById('veteran-toggle').checked;
+
+      let appliedDownPayment = downPayment;
+      let appliedInterestRate = interestRate;
+
+      // Veteran options:
+      // 0% down payment allowed (if field empty)
+      // Interest rate reduced by 0.5 (example benefit)
+      if (veteran) {
+        if (!downPayment) {
+          appliedDownPayment = 0;
+          document.getElementById('down-payment').value = "$0";
+        }
+        appliedInterestRate = Math.max(0, interestRate - 0.5);
+      }
+
+      // Calculate loan amount
+      const loanAmount = homePrice - appliedDownPayment;
+      
+      // Calculate monthly principal & interest
+      const monthlyPI = calculateMortgage(loanAmount, appliedInterestRate, loanTerm);
+      
+      // Calculate monthly taxes and insurance
+      const monthlyTaxes = propertyTaxes / 12;
+      const monthlyInsurance = insurance / 12;
+      
+      // Calculate total monthly payment
+      const totalPayment = monthlyPI + monthlyTaxes + monthlyInsurance + hoaDues;
+      
+      // Update display
+      document.getElementById('total-payment').textContent = displayCurrency(totalPayment);
+      document.getElementById('principal-interest').textContent = displayCurrency(monthlyPI);
+      document.getElementById('monthly-taxes').textContent = displayCurrency(monthlyTaxes);
+      document.getElementById('monthly-insurance').textContent = displayCurrency(monthlyInsurance);
+      document.getElementById('monthly-hoa').textContent = displayCurrency(hoaDues);
+      document.getElementById('loan-amount').textContent = displayCurrency(loanAmount);
+      
+      // Calculate down payment percentage
+      const downPaymentPercent = homePrice > 0 ? (appliedDownPayment / homePrice) * 100 : 0;
+      if (veteran && appliedDownPayment === 0) {
+        document.getElementById('down-payment-percent').textContent = '0% (Veteran)';
+      } else {
+        document.getElementById('down-payment-percent').textContent = downPaymentPercent.toFixed(1) + '%';
+      }
+      
+      // Get income and debt values
+      const grossIncome = parseFloat(unformatNumber(document.getElementById('gross-income').value)) || 0;
+      const otherDebts = parseFloat(unformatNumber(document.getElementById('monthly-debts').value)) || 0;
+      
+      // Calculate DTI ratios
+      const frontDtiEl = document.getElementById('front-dti');
+      const backDtiEl = document.getElementById('back-dti');
+      
+      let frontDti = 0;
+      let backDti = 0;
+      
+      if (grossIncome > 0) {
+        frontDti = (totalPayment / grossIncome) * 100;
+        backDti = ((totalPayment + otherDebts) / grossIncome) * 100;
+      }
+      
+      frontDtiEl.textContent = frontDti ? frontDti.toFixed(1) + '%' : '0%';
+      backDtiEl.textContent = backDti ? backDti.toFixed(1) + '%' : '0%';
+      
+      // Show/hide PMI notice
+      const pmiNotice = document.getElementById('pmi-notice');
+      if (homePrice > 0 && appliedDownPayment > 0 && downPaymentPercent < 20) {
+        pmiNotice.style.display = 'block';
+      } else {
+        pmiNotice.style.display = 'none';
+      }
+    }
+
+    function setupVeteranToggle() {
+      const veteranToggle = document.getElementById('veteran-toggle');
+      if (veteranToggle) {
+        veteranToggle.addEventListener('change', scheduleCalculation);
+      }
+    }
+
+    function setupNumberFormatting() {
+      const currencyFields = [
+        'gross-income',
+        'monthly-debts',
+        'home-price',
+        'down-payment',
+        'property-taxes',
+        'insurance',
+        'hoa-dues'
+      ];
+
+      currencyFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (!field) return;
+
+        field.addEventListener('input', function(e) {
+          const cursorPos = this.selectionStart;
+          const oldLength = this.value.length;
+          
+          this.value = formatCurrency(this.value);
+          
+          const newLength = this.value.length;
+          const lengthDiff = newLength - oldLength;
+          let newCursorPos = cursorPos + lengthDiff;
+          
+          if (cursorPos === oldLength) {
+            newCursorPos = newLength;
+          }
+          
+          this.setSelectionRange(newCursorPos, newCursorPos);
+          
+          scheduleCalculation();
+        });
+
+        field.addEventListener('blur', function() {
+          if (this.value) {
+            this.value = formatCurrency(this.value);
+          }
+        });
+      });
+
+      const numericFields = [
+        { id: 'interest-rate', maxDecimals: 2 },
+        { id: 'loan-term', maxDecimals: 0 }
+      ];
+
+      numericFields.forEach(fieldConfig => {
+        const field = document.getElementById(fieldConfig.id);
+        if (!field) return;
+
+        field.addEventListener('input', function(e) {
+          let value = this.value.replace(/[^\d.]/g, '');
+          
+          const parts = value.split('.');
+          if (parts.length > 2) {
+            value = parts[0] + '.' + parts.slice(1).join('');
+          }
+          
+          if (parts.length === 2 && fieldConfig.maxDecimals > 0) {
+            parts[1] = parts[1].substring(0, fieldConfig.maxDecimals);
+            value = parts.join('.');
+          } else if (fieldConfig.maxDecimals === 0) {
+            value = parts[0];
+          }
+          
+          this.value = value;
+          
+          scheduleCalculation();
+        });
+      });
+    }
+
+    function setupFieldResetHandlers() {
+      const propertyTaxesField = document.getElementById('property-taxes');
+      const insuranceField = document.getElementById('insurance');
+
+      if (propertyTaxesField) {
+        propertyTaxesField.addEventListener('focus', function() {
+          this.style.color = '#2d2d2d';
+        });
+      }
+
+      if (insuranceField) {
+        insuranceField.addEventListener('focus', function() {
+          this.style.color = '#2d2d2d';
+        });
+      }
+    }
+
+    // Lead form submission handler
+    function setupLeadForm() {
+      const leadForm = document.getElementById('lead-form');
+      const successMessage = document.getElementById('success-message');
+
+      if (leadForm) {
+        leadForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          // Get form values
+          const formData = {
+            name: document.getElementById('lead-name').value,
+            email: document.getElementById('lead-email').value,
+            phone: document.getElementById('lead-phone').value,
+            bestTime: document.getElementById('lead-time').value,
+            calculatorData: {
+              homePrice: document.getElementById('home-price').value,
+              downPayment: document.getElementById('down-payment').value,
+              interestRate: document.getElementById('interest-rate').value,
+              monthlyPayment: document.getElementById('total-payment').textContent
+            }
+          };
+
+          // Log submission (in real implementation, this would send to a server)
+          console.log('Lead form submitted:', formData);
+
+          // Hide form and show success message
+          leadForm.style.display = 'none';
+          successMessage.classList.add('show');
+
+          // Optional: Reset form after delay (for demo purposes)
+          setTimeout(() => {
+            leadForm.reset();
+          }, 1000);
+        });
+      }
+    }
+
+    // Initialize
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function() {
+        setupNumberFormatting();
+        setupFieldResetHandlers();
+        setupLeadForm();
+        setupVeteranToggle();
+        performCalculation();
+      });
+    } else {
+      setupNumberFormatting();
+      setupFieldResetHandlers();
+      setupLeadForm();
+      setupVeteranToggle();
+      performCalculation();
+    }
+
+    // Element SDK initialization
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_light || defaultConfig.background_light,
+              set: (value) => {
+                window.elementSdk.config.background_light = value;
+                window.elementSdk.setConfig({ background_light: value });
+              }
+            },
+            {
+              get: () => config.accent_gold || defaultConfig.accent_gold,
+              set: (value) => {
+                window.elementSdk.config.accent_gold = value;
+                window.elementSdk.setConfig({ accent_gold: value });
+              }
+            },
+            {
+              get: () => config.evergreen || defaultConfig.evergreen,
+              set: (value) => {
+                window.elementSdk.config.evergreen = value;
+                window.elementSdk.setConfig({ evergreen: value });
+              }
+            },
+            {
+              get: () => config.festive_red || defaultConfig.festive_red,
+              set: (value) => {
+                window.elementSdk.config.festive_red = value;
+                window.elementSdk.setConfig({ festive_red: value });
+              }
+            },
+            {
+              get: () => config.text_dark || defaultConfig.text_dark,
+              set: (value) => {
+                window.elementSdk.config.text_dark = value;
+                window.elementSdk.setConfig({ text_dark: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["tagline", config.tagline || defaultConfig.tagline]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ab1d23ee748fe0e',t:'MTc2NTI1NTE5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
