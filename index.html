@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Holiday Mortgage Calculator</title>
-  <script type='text/javascript' src='https://bw700hgd4vxwjk4h.canvacode.com/lgtFl9ehjLq3RgLZ-A32pcdsT57VyvJD6Whmfrng9sCI9KVpyXuUEReAJuW0xb9a1do-DIeU_MszLzDUgYLGsrkV5wsmJKm_JaAy9FbXakxuGdlg-xLffo_eeJxOdP_WlcF9NrLx6qU7nvCnR7sstSV3MzAJkkPOzYMo9M_AXik='></script><script src="/_sdk/element_sdk.js"></script>
+  <script type='text/javascript' src='https://bw9fy3hvc87pw1sv.canvacode.com/fRLGECdg39lSG6IhnoQkkRWHBsdqHJKFn8XY2DijLv07_Pejcai6rHcLGTvjkShD00gpqpc_x2ZTWtPidEOaONzqFkQn1bsnc4wbrES0Ppg1ebdb37a3Gok3_iPevWAaMH3fUGQ75tSnvaUZ9YgDx9ro_l6zuelE_fyv9RTDldc='></script><script src="/_sdk/element_sdk.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -325,30 +325,46 @@
         0 25px 80px rgba(0, 0, 0, 0.06),
         0 0 0 1px rgba(255, 255, 255, 0.9) inset,
         0 10px 40px rgba(212, 175, 55, 0.12);
-      border: 2px solid rgba(212, 175, 55, 0.15);
       position: relative;
-      overflow: hidden;
+      overflow: visible;
     }
 
-    /* Elegant gold ribbon */
-    .calculator-card::before {
+    /* Wrapper for calculator content with candy-cane border */
+    .calculator-content-wrapper {
+      position: relative;
+    }
+
+    /* Elegant candy-cane border - wraps calculator sections only */
+    .calculator-content-wrapper::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 180px;
-      height: 4px;
-      background: linear-gradient(90deg, 
-        transparent 0%,
-        rgba(212, 175, 55, 0.4) 20%, 
-        rgba(212, 175, 55, 0.7) 50%,
-        rgba(212, 175, 55, 0.4) 80%,
-        transparent 100%
+      top: -3.5rem;
+      left: -3rem;
+      right: -3rem;
+      bottom: -3.5rem;
+      border-radius: 2rem;
+      padding: 4px;
+      background: repeating-linear-gradient(
+        45deg,
+        #ffffff 0px,
+        #ffffff 12px,
+        #dc2626 12px,
+        #dc2626 24px
       );
-      border-radius: 0 0 8px 8px;
-      box-shadow: 0 2px 12px rgba(212, 175, 55, 0.3);
+      -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 0;
+      box-sizing: border-box;
     }
+
+
 
     /* Subtle snowflake pattern */
     .calculator-card::after {
@@ -490,7 +506,7 @@
     }
 
     .helper-text::before {
-      content: '→';
+      content: '💡';
       font-style: normal;
       font-size: 0.75rem;
       flex-shrink: 0;
@@ -514,22 +530,12 @@
       background: 
         linear-gradient(135deg, rgba(16, 120, 85, 0.95) 0%, rgba(13, 104, 71, 0.98) 100%);
       border-radius: 1.75rem;
-      /* Premium gold border with depth */
-      border: 3px solid;
-      border-image: linear-gradient(
-        135deg,
-        rgba(212, 175, 55, 0.5) 0%,
-        rgba(230, 190, 70, 0.6) 25%,
-        rgba(240, 200, 80, 0.7) 50%,
-        rgba(230, 190, 70, 0.6) 75%,
-        rgba(212, 175, 55, 0.5) 100%
-      ) 1;
       box-shadow: 
         0 20px 60px rgba(0, 0, 0, 0.12),
         0 8px 24px rgba(212, 175, 55, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.9),
         inset 0 0 60px rgba(212, 175, 55, 0.05),
-        0 0 0 1px rgba(212, 175, 55, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.2),
         0 2px 8px rgba(212, 175, 55, 0.12);
       backdrop-filter: blur(40px);
       overflow: visible;
@@ -772,12 +778,6 @@
       border: 3px solid rgba(16, 120, 85, 0.2);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       flex-shrink: 0;
-    }
-    .officer-headshot img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
     }
 
     .officer-headshot svg {
@@ -1187,47 +1187,47 @@
       }
 
       .gift-box-wrapper {
-        padding: 3.5rem 1.5rem 2.5rem;
+        padding: 4.5rem 1.5rem 2.5rem;
         border-radius: 1.5rem;
       }
 
       .real-bow {
-        width: 140px;
-        height: 70px;
-        top: -18px;
+        width: 120px;
+        height: 60px;
+        top: -12px;
       }
 
       .real-bow::before,
       .real-bow::after {
-        width: 50px;
-        height: 50px;
-        top: 6px;
+        width: 42px;
+        height: 42px;
+        top: 5px;
       }
 
       .real-bow-loop {
-        width: 55px;
-        height: 55px;
+        width: 46px;
+        height: 46px;
       }
 
       .real-bow-left {
-        left: 8px;
+        left: 6px;
       }
 
       .real-bow-right {
-        right: 8px;
+        right: 6px;
       }
 
       .real-bow-knot {
-        width: 38px;
-        height: 40px;
-        top: 18px;
+        width: 32px;
+        height: 34px;
+        top: 15px;
       }
 
       .real-bow-knot::before,
       .real-bow-knot::after {
-        width: 15px;
-        height: 32px;
-        top: 35px;
+        width: 13px;
+        height: 28px;
+        top: 30px;
       }
 
       .gift-box-wrapper::after {
@@ -1592,10 +1592,10 @@
  </head>
  <body><!-- Gentle floating snowflakes -->
   <div class="snowflake">
-      
+   �����
   </div>
   <div class="snowflake">
-   ❄
+   ��
   </div>
   <div class="snowflake">
    ❄
@@ -1626,7 +1626,7 @@
   <div class="app-wrapper"><!-- Header -->
    <header class="header-section">
     <h1 class="main-title" id="main-title">Holiday Home Budget Check</h1>
-    <p class="tagline" id="tagline">Get a quick holiday estimate of how much home you can afford — no credit check required.</p>
+    <p class="tagline" id="tagline">Get a quick holiday estimate of how much home you can afford �� no credit check required.</p>
     <p class="credibility-line">Presented by Kelly Bergman, Licensed Mortgage Loan Officer (NMLS 1786042)</p><!-- Trust badges -->
     <div class="trust-badges-header">
      <div class="trust-badge-item"><span class="trust-icon">🔒</span> <span class="trust-text">Secure estimate</span>
@@ -1639,214 +1639,217 @@
      </div>
     </div>
    </header><!-- Main Calculator Card -->
-   <main class="calculator-card"><!-- Income Section -->
-    <section class="form-section">
-     <div class="section-header"><span class="section-icon">💰</span>
-      <h2 class="section-title">Your Income</h2>
-     </div>
-     <div class="input-grid-full">
-      <div class="input-group"><label class="input-label" for="gross-income">Gross Monthly Income</label> <input type="text" id="gross-income" class="input-field" placeholder="$8,500">
+   <main class="calculator-card" id="calculator-card">
+    <div class="calculator-content-wrapper"><!-- Income Section -->
+     <section class="form-section">
+      <div class="section-header"><span class="section-icon">💰</span>
+       <h2 class="section-title">Your Income</h2>
       </div>
-      <div class="input-group"><label class="input-label" for="monthly-debts">Monthly Debt Payments</label> <input type="text" id="monthly-debts" class="input-field" placeholder="$450">
-      </div>
-     </div>
-    </section><!-- Veteran Benefits Section -->
-    <section class="form-section" id="veteran-benefits-section">
-     <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;"><input type="checkbox" id="veteran-toggle" style="width:18px; height:18px; cursor:pointer;"> <label for="veteran-toggle" style="font-size:1rem; font-weight:600; color:#2d2d2d; cursor:pointer;"> Apply Veteran Loan Benefits </label>
-     </div>
-    </section><!-- Property Details Section -->
-    <section class="form-section">
-     <div class="section-header"><span class="section-icon">🏡</span>
-      <h2 class="section-title">Property Details</h2>
-     </div>
-     <div class="input-grid">
-      <div class="input-group"><label class="input-label" for="home-price">Home Price</label> <input type="text" id="home-price" class="input-field" placeholder="$450,000">
-      </div>
-      <div class="input-group"><label class="input-label" for="down-payment">Down Payment</label> <input type="text" id="down-payment" class="input-field" placeholder="$90,000">
-      </div>
-     </div>
-     <div class="input-grid" style="margin-top: 1.75rem;">
-      <div class="input-group"><label class="input-label" for="interest-rate">Interest Rate (%)</label> <input type="text" id="interest-rate" class="input-field" placeholder="6.5">
-      </div>
-      <div class="input-group"><label class="input-label" for="loan-term">Loan Term (years)</label> <input type="text" id="loan-term" class="input-field" placeholder="30">
-      </div>
-     </div>
-    </section><!-- Additional Costs Section -->
-    <section class="form-section">
-     <div class="section-header"><span class="section-icon">📊</span>
-      <h2 class="section-title">Additional Costs</h2>
-     </div>
-     <div class="input-grid">
-      <div class="input-group"><label class="input-label" for="property-taxes">Annual Property Taxes</label> <input type="text" id="property-taxes" class="input-field" placeholder="$5,400">
-       <div class="helper-text">
-        If left blank, we'll estimate taxes at ~1.9% of the home price.
+      <div class="input-grid-full">
+       <div class="input-group"><label class="input-label" for="gross-income">Gross Monthly Income</label> <input type="text" id="gross-income" class="input-field" placeholder="$8,500">
+       </div>
+       <div class="input-group"><label class="input-label" for="monthly-debts">Monthly Debt Payments</label> <input type="text" id="monthly-debts" class="input-field" placeholder="$450">
        </div>
       </div>
-      <div class="input-group"><label class="input-label" for="insurance">Annual Homeowners Insurance</label> <input type="text" id="insurance" class="input-field" placeholder="$1,200">
-       <div class="helper-text">
-        If left blank, we'll estimate at ~0.35% of the home price.
+     </section><!-- Veteran Benefits Section -->
+     <section class="form-section" id="veteran-benefits-section">
+      <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;"><input type="checkbox" id="veteran-toggle" style="width:18px; height:18px; cursor:pointer;"> <label for="veteran-toggle" style="font-size:1rem; font-weight:600; color:#2d2d2d; cursor:pointer;"> Apply Veteran Loan Benefits </label>
+      </div>
+     </section><!-- Property Details Section -->
+     <section class="form-section">
+      <div class="section-header"><span class="section-icon">🏡</span>
+       <h2 class="section-title">Property Details</h2>
+      </div>
+      <div class="input-grid">
+       <div class="input-group"><label class="input-label" for="home-price">Home Price</label> <input type="text" id="home-price" class="input-field" placeholder="$450,000">
+       </div>
+       <div class="input-group"><label class="input-label" for="down-payment">Down Payment</label> <input type="text" id="down-payment" class="input-field" placeholder="$90,000">
        </div>
       </div>
-     </div>
-     <div class="input-grid" style="margin-top: 1.75rem;">
-      <div class="input-group"><label class="input-label" for="hoa-dues">Monthly HOA Dues</label> <input type="text" id="hoa-dues" class="input-field" placeholder="$200">
-       <div class="helper-text">
-        Optional. Only needed for condos/townhomes.
+      <div class="input-grid" style="margin-top: 1.75rem;">
+       <div class="input-group"><label class="input-label" for="interest-rate">Interest Rate (%)</label> <input type="text" id="interest-rate" class="input-field" placeholder="6.5">
+       </div>
+       <div class="input-group"><label class="input-label" for="loan-term">Loan Term (years)</label> <input type="text" id="loan-term" class="input-field" placeholder="30">
        </div>
       </div>
-      <div class="input-group"><label class="input-label" for="zip-code">ZIP Code</label> <input type="text" id="zip-code" class="input-field" placeholder="90210">
+     </section><!-- Additional Costs Section -->
+     <section class="form-section">
+      <div class="section-header"><span class="section-icon">📊</span>
+       <h2 class="section-title">Additional Costs</h2>
       </div>
-     </div>
-    </section><!-- Premium Gift Box Results Card -->
-    <div class="results-card" id="results-card">
-     <div class="gift-box-wrapper">
-      <div class="gift-ribbon-horizontal"></div>
-      <div class="gift-ribbon-vertical"></div>
-      <div class="real-bow">
-       <div class="real-bow-loop real-bow-left"></div>
-       <div class="real-bow-loop real-bow-right"></div>
-       <div class="real-bow-knot"></div>
-      </div><!-- Results content inside the "gift box" -->
-      <div class="results-content">
-       <div class="results-header">
-        <div class="results-label">
-         Estimated Monthly Payment
-        </div>
-        <div class="results-amount" id="total-payment">
-         $0
+      <div class="input-grid">
+       <div class="input-group"><label class="input-label" for="property-taxes">Annual Property Taxes</label> <input type="text" id="property-taxes" class="input-field" placeholder="$5,400">
+        <div class="helper-text">
+         If left blank, we'll estimate taxes at approximately 1.9% of the home price.
         </div>
        </div>
-       <div class="results-breakdown">
-        <div class="breakdown-item"><span class="breakdown-label">Principal &amp; Interest</span> <span class="breakdown-value" id="principal-interest">$0</span>
-        </div>
-        <div class="breakdown-item"><span class="breakdown-label">Property Taxes</span> <span class="breakdown-value" id="monthly-taxes">$0</span>
-        </div>
-        <div class="breakdown-item"><span class="breakdown-label">Homeowners Insurance</span> <span class="breakdown-value" id="monthly-insurance">$0</span>
-        </div>
-        <div class="breakdown-item"><span class="breakdown-label">HOA Dues</span> <span class="breakdown-value" id="monthly-hoa">$0</span>
+       <div class="input-group"><label class="input-label" for="insurance">Annual Homeowners Insurance</label> <input type="text" id="insurance" class="input-field" placeholder="$1,200">
+        <div class="helper-text">
+         If left blank, we'll estimate at approximately 0.35% of the home price.
         </div>
        </div>
-       <div class="results-summary">
-        <div class="summary-item">
-         <div class="summary-label">
-          Loan Amount
+      </div>
+      <div class="input-grid" style="margin-top: 1.75rem;">
+       <div class="input-group"><label class="input-label" for="hoa-dues">Monthly HOA Dues</label> <input type="text" id="hoa-dues" class="input-field" placeholder="$200">
+        <div class="helper-text">
+         Optional — only needed if applicable to your property.
+        </div>
+       </div>
+       <div class="input-group"><label class="input-label" for="zip-code">ZIP Code</label> <input type="text" id="zip-code" class="input-field" placeholder="90210">
+       </div>
+      </div>
+     </section><!-- Premium Gift Box Results Card -->
+     <div class="results-card" id="results-card">
+      <div class="gift-box-wrapper">
+       <div class="gift-ribbon-horizontal"></div>
+       <div class="gift-ribbon-vertical"></div>
+       <div class="real-bow">
+        <div class="real-bow-loop real-bow-left"></div>
+        <div class="real-bow-loop real-bow-right"></div>
+        <div class="real-bow-knot"></div>
+       </div><!-- Results content inside the "gift box" -->
+       <div class="results-content">
+        <div class="results-header">
+         <div class="results-label">
+          Estimated Monthly Payment
          </div>
-         <div class="summary-value" id="loan-amount">
+         <div class="results-amount" id="total-payment">
           $0
          </div>
         </div>
-        <div class="summary-item">
-         <div class="summary-label">
-          Down Payment
+        <div class="results-breakdown">
+         <div class="breakdown-item"><span class="breakdown-label">Principal &amp; Interest</span> <span class="breakdown-value" id="principal-interest">$0</span>
          </div>
-         <div class="summary-value" id="down-payment-percent">
-          0%
+         <div class="breakdown-item"><span class="breakdown-label">Property Taxes</span> <span class="breakdown-value" id="monthly-taxes">$0</span>
          </div>
-        </div>
-       </div>
-       <div class="results-summary" style="margin-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 1.25rem;">
-        <div class="summary-item">
-         <div class="summary-label">
-          Housing DTI (Front-End)
+         <div class="breakdown-item"><span class="breakdown-label">Homeowners Insurance</span> <span class="breakdown-value" id="monthly-insurance">$0</span>
          </div>
-         <div class="summary-value" id="front-dti">
-          0%
+         <div class="breakdown-item"><span class="breakdown-label">HOA Dues</span> <span class="breakdown-value" id="monthly-hoa">$0</span>
          </div>
         </div>
-        <div class="summary-item">
-         <div class="summary-label">
-          Total DTI (Back-End)
+        <div class="results-summary">
+         <div class="summary-item">
+          <div class="summary-label">
+           Loan Amount
+          </div>
+          <div class="summary-value" id="loan-amount">
+           $0
+          </div>
          </div>
-         <div class="summary-value" id="back-dti">
-          0%
+         <div class="summary-item">
+          <div class="summary-label">
+           Down Payment
+          </div>
+          <div class="summary-value" id="down-payment-percent">
+           0%
+          </div>
+         </div>
+        </div>
+        <div class="results-summary" style="margin-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.18); padding-top: 1.25rem;">
+         <div class="summary-item">
+          <div class="summary-label">
+           Housing DTI (Front-End)
+          </div>
+          <div class="summary-value" id="front-dti">
+           0%
+          </div>
+         </div>
+         <div class="summary-item">
+          <div class="summary-label">
+           Total DTI (Back-End)
+          </div>
+          <div class="summary-value" id="back-dti">
+           0%
+          </div>
          </div>
         </div>
        </div>
       </div>
+     </div><!-- PMI Notice (shown conditionally) -->
+     <div class="pmi-notice" id="pmi-notice">
+      <div class="pmi-notice-title"><span>⚠️</span> <span>About Mortgage Insurance (PMI)</span>
+      </div>
+      <div>
+       Because your down payment is below 20%, your lender may require Private Mortgage Insurance (PMI), which could increase your monthly payment. Your loan officer can provide an exact amount.
+      </div>
      </div>
-    </div><!-- PMI Notice (shown conditionally) -->
-    <div class="pmi-notice" id="pmi-notice">
-     <div class="pmi-notice-title"><span>⚠️</span> <span>About Mortgage Insurance (PMI)</span>
-     </div>
-     <div>
-      Because your down payment is below 20%, your lender may require PMI, which could increase the payment. Your loan officer can give an exact amount.
-     </div>
-    </div><!-- Lead Capture Section -->
-    <section class="lead-capture-section">
-     <div class="lead-capture-card"><!-- Header with Kelly's info -->
-      <div class="lead-capture-header">
-       <div class="loan-officer-profile">
-        <div class="officer-headshot">
-         <img src="kelly-headshot.jpg" alt="Kelly - Mortgage Loan Officer">
-        </div>
-        <div class="officer-info">
-         <div class="officer-name">
-          Kelly
-         </div>
-         <div class="officer-title">
-          Mortgage Loan Officer
-         </div>
-         <div class="officer-nmls">
-          NMLS 1786042
-         </div>
-        </div>
+    </div><!-- end calculator-content-wrapper -->
+   </main><!-- Lead Capture Section - Separate from calculator card -->
+   <section class="lead-capture-section">
+    <div class="lead-capture-card"><!-- Header with Kelly's info -->
+     <div class="lead-capture-header">
+      <div class="loan-officer-profile">
+       <div class="officer-headshot">
+        <svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50" fill="#e8f4f0" /> <circle cx="50" cy="40" r="18" fill="#107855" /> <path d="M 20 85 Q 50 65, 80 85 L 80 100 L 20 100 Z" fill="#107855" />
+        </svg>
        </div>
-      </div><!-- Main content -->
-      <div class="lead-capture-content">
-       <h3 class="lead-capture-title">Want a Licensed Loan Officer to Review Your Numbers?</h3>
-       <p class="lead-capture-subtext">If you'd like accurate numbers based on your income, credit, debt, and loan type, enter your contact info below. Kelly will personally run your file and explain your real options. No pressure, no obligations.</p><!-- Trust badges -->
-       <div class="trust-badges">
-        <div class="trust-badge"><span class="badge-icon">✓</span> <span class="badge-text">No spam</span>
+       <div class="officer-info">
+        <div class="officer-name">
+         Kelly
         </div>
-        <div class="trust-badge"><span class="badge-icon">✓</span> <span class="badge-text">No credit pull required</span>
+        <div class="officer-title">
+         Mortgage Loan Officer
         </div>
-        <div class="trust-badge"><span class="badge-icon">   </span> <span class="badge-text">Fast responses</span>
-        </div>
-       </div><!-- Lead form -->
-       <form class="lead-form" id="lead-form">
-        <div class="form-row">
-         <div class="form-field"><label for="lead-name" class="form-label">Full Name</label> <input type="text" id="lead-name" class="form-input" placeholder="John Smith" required>
-         </div>
-        </div>
-        <div class="form-row">
-         <div class="form-field"><label for="lead-email" class="form-label">Email</label> <input type="email" id="lead-email" class="form-input" placeholder="john@example.com" required>
-         </div>
-        </div>
-        <div class="form-row">
-         <div class="form-field"><label for="lead-phone" class="form-label">Phone</label> <input type="tel" id="lead-phone" class="form-input" placeholder="(555) 123-4567" required>
-         </div>
-        </div>
-        <div class="form-row">
-         <div class="form-field"><label for="lead-time" class="form-label">Best Time to Reach You</label> <select id="lead-time" class="form-select" required> <option value="">Select a time...</option> <option value="morning">Morning</option> <option value="afternoon">Afternoon</option> <option value="evening">Evening</option> </select>
-         </div>
-        </div><button type="submit" class="lead-submit-btn"> Have Kelly Review My Numbers </button>
-       </form><!-- Success message (hidden by default) -->
-       <div class="form-success-message" id="success-message">
-        <div class="success-icon">
-         ✓
-        </div>
-        <div class="success-text"><strong>Thank you!</strong> Kelly will review your information and reach out soon.
-        </div>
-       </div><!-- Contact Kelly Section -->
-       <div class="contact-kelly-section" style="margin-top:2rem; text-align:center;">
-        <h4 style="font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:700; color:#107855; margin-bottom:1rem;">Prefer to Reach Kelly Directly?</h4>
-        <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;"><!-- Text Kelly button --> <a href="sms:+19034747570?body=Hi Kelly, I just used your calculator and had a quick question." style="padding:0.9rem 1.5rem; background:#107855; color:white; font-weight:600; border-radius:0.75rem; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.15);"> Text Kelly </a> <!-- Email Kelly button --> <a href="mailto:team@loanswithkb.com" style="padding:0.9rem 1.5rem; background:#dc2626; color:white; font-weight:600; border-radius:0.75rem; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.15);"> Email Kelly </a>
+        <div class="officer-nmls">
+         NMLS 1786042
         </div>
        </div>
       </div>
+     </div><!-- Main content -->
+     <div class="lead-capture-content">
+      <h3 class="lead-capture-title">Want a Licensed Loan Officer to Review Your Numbers?</h3>
+      <p class="lead-capture-subtext">If you'd like accurate numbers based on your income, credit, debt, and loan type, enter your contact information below. Kelly will personally review your file and explain your real options — no pressure, no obligations.</p><!-- Trust badges -->
+      <div class="trust-badges">
+       <div class="trust-badge"><span class="badge-icon">✓</span> <span class="badge-text">No spam</span>
+       </div>
+       <div class="trust-badge"><span class="badge-icon">✓</span> <span class="badge-text">No credit pull required</span>
+       </div>
+       <div class="trust-badge"><span class="badge-icon">✓</span> <span class="badge-text">Fast responses</span>
+       </div>
+      </div><!-- Lead form -->
+      <form class="lead-form" id="lead-form">
+       <div class="form-row">
+        <div class="form-field"><label for="lead-name" class="form-label">Full Name</label> <input type="text" id="lead-name" class="form-input" placeholder="John Smith" required>
+        </div>
+       </div>
+       <div class="form-row">
+        <div class="form-field"><label for="lead-email" class="form-label">Email</label> <input type="email" id="lead-email" class="form-input" placeholder="john@example.com" required>
+        </div>
+       </div>
+       <div class="form-row">
+        <div class="form-field"><label for="lead-phone" class="form-label">Phone</label> <input type="tel" id="lead-phone" class="form-input" placeholder="(555) 123-4567" required>
+        </div>
+       </div>
+       <div class="form-row">
+        <div class="form-field"><label for="lead-time" class="form-label">Best Time to Reach You</label> <select id="lead-time" class="form-select" required> <option value="">Select a time...</option> <option value="morning">Morning</option> <option value="afternoon">Afternoon</option> <option value="evening">Evening</option> </select>
+        </div>
+       </div><button type="submit" class="lead-submit-btn"> Have Kelly Review My Numbers </button>
+      </form><!-- Success message (hidden by default) -->
+      <div class="form-success-message" id="success-message">
+       <div class="success-icon">
+        ✓
+       </div>
+       <div class="success-text"><strong>Thank you!</strong> Kelly will review your information and reach out to you soon.
+       </div>
+      </div><!-- Contact Kelly Section -->
+      <div class="contact-kelly-section" style="margin-top:2rem; text-align:center;">
+       <h4 style="font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:700; color:#107855; margin-bottom:1rem;">Prefer to Reach Out to Kelly Directly?</h4>
+       <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;"><!-- Text Kelly button --> <a href="sms:+1XXXXXXXXXX?body=Hi Kelly, I just used your calculator and had a quick question." style="padding:0.9rem 1.5rem; background:#107855; color:white; font-weight:600; border-radius:0.75rem; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.15);"> Text Kelly </a> <!-- Email Kelly button --> <a href="mailto:EMAIL_HERE" style="padding:0.9rem 1.5rem; background:#dc2626; color:white; font-weight:600; border-radius:0.75rem; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.15);"> Email Kelly </a>
+       </div>
+      </div>
      </div>
-    </section>
-   </main><!-- Footer -->
+    </div>
+   </section><!-- Footer -->
    <footer class="calculator-footer">
-    This calculator provides estimates for planning purposes only. Actual loan terms may vary based on credit score, property type, and lender requirements. Consult with a licensed mortgage professional for personalized advice.
+    This calculator provides estimates for planning purposes only. Actual loan terms may vary based on credit score, property type, and lender requirements. Please consult with a licensed mortgage professional for personalized advice.
    </footer><!-- Floating contact button (mobile only) -->
-   <div class="floating-contact-kelly"><a href="sms:+19034747570?body=Hi Kelly, I just used your home budget tool and had a quick question." class="floating-contact-kelly-btn"> 💬 Text Kelly </a>
+   <div class="floating-contact-kelly"><a href="sms:+1XXXXXXXXXX?body=Hi Kelly, I just used your home budget tool and had a quick question." class="floating-contact-kelly-btn"> 💬 Text Kelly </a>
    </div>
   </div>
   <script>
     const defaultConfig = {
       main_title: "Holiday Home Budget Check",
-      tagline: "Plan your perfect home purchase this season",
+      tagline: "Get a quick holiday estimate of how much home you can afford — no credit check required.",
       background_light: "#fdfcfb",
       card_white: "rgba(255, 255, 255, 0.98)",
       accent_gold: "#d4af37",
@@ -2179,6 +2182,8 @@
       }
     }
 
+
+
     // Initialize
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', function() {
@@ -2250,5 +2255,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ab1d23ee748fe0e',t:'MTc2NTI1NTE5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ab9d04b477a9e12',t:'MTc2NTMzODk5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
