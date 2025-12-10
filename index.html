@@ -1753,7 +1753,26 @@
        <div class="trust-badge"><span class="badge-icon">✓</span> <span class="badge-text">Fast responses</span>
        </div>
       </div><!-- Lead form -->
-      <form class="lead-form" id="lead-form">
+      <form
+  class="lead-form"
+  id="lead-form"
+  name="kelly-leads"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+>
+  <!-- Netlify needs this hidden field to identify the form -->
+  <input type="hidden" name="form-name" value="kelly-leads" />
+  <p style="display:none;">
+    <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+  </p>
+  <input type="hidden" name="home_price" id="calc-home-price" />
+  <input type="hidden" name="down_payment" id="calc-down-payment" />
+  <input type="hidden" name="interest_rate" id="calc-interest-rate-hidden" />
+  <input type="hidden" name="monthly_payment" id="calc-monthly-payment" />
+  <input type="hidden" name="front_dti" id="calc-front-dti" />
+  <input type="hidden" name="back_dti" id="calc-back-dti" />
+
        <div class="form-row">
         <div class="form-field"><label for="lead-name" class="form-label">Full Name</label> <input type="text" id="lead-name" class="form-input" placeholder="John Smith" required>
         </div>
@@ -1957,6 +1976,21 @@
       document.getElementById('monthly-insurance').textContent = displayCurrency(monthlyInsurance);
       document.getElementById('monthly-hoa').textContent = displayCurrency(hoaDues);
       document.getElementById('loan-amount').textContent = displayCurrency(loanAmount);
+
+      // Update hidden fields for the lead form (if present)
+      const hiddenHomePrice = document.getElementById('calc-home-price');
+      const hiddenDownPayment = document.getElementById('calc-down-payment');
+      const hiddenInterestRate = document.getElementById('calc-interest-rate-hidden');
+      const hiddenMonthlyPayment = document.getElementById('calc-monthly-payment');
+      const hiddenFrontDti = document.getElementById('calc-front-dti');
+      const hiddenBackDti = document.getElementById('calc-back-dti');
+
+      if (hiddenHomePrice) hiddenHomePrice.value = document.getElementById('home-price').value || '';
+      if (hiddenDownPayment) hiddenDownPayment.value = document.getElementById('down-payment').value || '';
+      if (hiddenInterestRate) hiddenInterestRate.value = interestRateInput || '';
+      if (hiddenMonthlyPayment) hiddenMonthlyPayment.value = totalPayment ? totalPayment.toFixed(2) : '';
+      if (hiddenFrontDti) hiddenFrontDti.value = frontDti ? frontDti.toFixed(1) + '%' : '0%';
+      if (hiddenBackDti) hiddenBackDti.value = backDti ? backDti.toFixed(1) + '%' : '0%';
       
       // Calculate down payment percentage
       const downPaymentPercent = homePrice > 0 ? (appliedDownPayment / homePrice) * 100 : 0;
@@ -2099,34 +2133,34 @@
         leadForm.addEventListener('submit', function(e) {
           e.preventDefault();
 
-          // Get form values
-          const formData = {
-            name: document.getElementById('lead-name').value,
-            email: document.getElementById('lead-email').value,
-            phone: document.getElementById('lead-phone').value,
-            bestTime: document.getElementById('lead-time').value,
-            calculatorData: {
-              homePrice: document.getElementById('home-price').value,
-              downPayment: document.getElementById('down-payment').value,
-              interestRate: document.getElementById('interest-rate').value,
-              monthlyPayment: document.getElementById('total-payment').textContent
-            }
-          };
+          // Make sure the latest calculator numbers are reflected in the hidden fields
+          try {
+            performCalculation();
+          } catch (err) {
+            console.error('Error updating calculator fields before submit:', err);
+          }
 
-          // Log submission (in real implementation, this would send to a server)
-          console.log('Lead form submitted:', formData);
+          const formData = new FormData(leadForm);
 
-          // Hide form and show success message
-          leadForm.style.display = 'none';
-          successMessage.classList.add('show');
-
-          // Optional: Reset form after delay (for demo purposes)
-          setTimeout(() => {
-            leadForm.reset();
-          }, 1000);
+          // Send to Netlify (or any static host that supports form posts)
+          fetch(leadForm.getAttribute('action') || '/', {
+            method: 'POST',
+            body: formData
+          })
+            .then(() => {
+              leadForm.style.display = 'none';
+              if (successMessage) {
+                successMessage.classList.add('show');
+              }
+            })
+            .catch((error) => {
+              console.error('Form submission error:', error);
+              alert('Something went wrong sending your info. Please try again, or text/email Kelly directly using the buttons below.');
+            });
         });
       }
     }
+
 
 
 
@@ -2203,3 +2237,4 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ab9d04b477a9e12',t:'MTc2NTMzODk5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
