@@ -53,7 +53,6 @@
       z-index: 1;
     }
 
-   
     /* Premium Christmas lights - champagne gold theme */
     .christmas-lights {
       position: fixed;
@@ -741,7 +740,10 @@
       border: 3px solid rgba(16, 120, 85, 0.2);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       flex-shrink: 0;
+    
+      overflow:hidden;
     }
+
 
     .officer-headshot svg {
       width: 100%;
@@ -1553,8 +1555,7 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
-
-  </div><!-- Elegant Christmas lights -->
+ <body><!-- Elegant Christmas lights -->
   <div class="christmas-lights">
    <div class="light"></div>
    <div class="light"></div>
@@ -1572,7 +1573,7 @@
   <div class="app-wrapper"><!-- Header -->
    <header class="header-section">
     <h1 class="main-title" id="main-title">Holiday Home Budget Check</h1>
-    <p class="tagline" id="tagline">Get a quick holiday estimate of how much home you can afford - no credit check required.</p>
+    <p class="tagline" id="tagline">Get a quick holiday estimate of how much home you can afford    no credit check required.</p>
     <p class="credibility-line">Presented by Kelly Bergman, Licensed Mortgage Loan Officer (NMLS 1786042)</p><!-- Trust badges -->
     <div class="trust-badges-header">
      <div class="trust-badge-item"><span class="trust-icon">🔒</span> <span class="trust-text">Secure estimate</span>
@@ -1726,8 +1727,7 @@
      <div class="lead-capture-header">
       <div class="loan-officer-profile">
        <div class="officer-headshot">
-        <svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="50" fill="#e8f4f0" /> <circle cx="50" cy="40" r="18" fill="#107855" /> <path d="M 20 85 Q 50 65, 80 85 L 80 100 L 20 100 Z" fill="#107855" />
-        </svg>
+        <img src="kelly-headshot.jpg" alt="Kelly Bergman - Mortgage Loan Officer">
        </div>
        <div class="officer-info">
         <div class="officer-name">
@@ -1780,7 +1780,7 @@
       </div><!-- Contact Kelly Section -->
       <div class="contact-kelly-section" style="margin-top:2rem; text-align:center;">
        <h4 style="font-family:'Playfair Display',serif; font-size:1.35rem; font-weight:700; color:#107855; margin-bottom:1rem;">Prefer to Reach Out to Kelly Directly?</h4>
-       <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;"><!-- Text Kelly button --> <a href="sms:+1XXXXXXXXXX?body=Hi Kelly, I just used your calculator and had a quick question." style="padding:0.9rem 1.5rem; background:#107855; color:white; font-weight:600; border-radius:0.75rem; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.15);"> Text Kelly </a> <!-- Email Kelly button --> <a href="mailto:EMAIL_HERE" style="padding:0.9rem 1.5rem; background:#dc2626; color:white; font-weight:600; border-radius:0.75rem; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.15);"> Email Kelly </a>
+       <div style="display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;"><!-- Text Kelly button --> <a href="sms:+19034747570?body=Hi Kelly, I just used your calculator and had a quick question." style="padding:0.9rem 1.5rem; background:#107855; color:white; font-weight:600; border-radius:0.75rem; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.15);"> Text Kelly </a> <!-- Email Kelly button --> <a href="mailto:team@loanswithkb.com" style="padding:0.9rem 1.5rem; background:#dc2626; color:white; font-weight:600; border-radius:0.75rem; text-decoration:none; box-shadow:0 4px 10px rgba(0,0,0,0.15);"> Email Kelly </a>
        </div>
       </div>
      </div>
@@ -1789,7 +1789,7 @@
    <footer class="calculator-footer">
     This calculator provides estimates for planning purposes only. Actual loan terms may vary based on credit score, property type, and lender requirements. Please consult with a licensed mortgage professional for personalized advice.
    </footer><!-- Floating contact button (mobile only) -->
-   <div class="floating-contact-kelly"><a href="sms:+1XXXXXXXXXX?body=Hi Kelly, I just used your home budget tool and had a quick question." class="floating-contact-kelly-btn"> 💬 Text Kelly </a>
+   <div class="floating-contact-kelly"><a href="sms:+19034747570?body=Hi Kelly, I just used your home budget tool and had a quick question." class="floating-contact-kelly-btn"> 💬 Text Kelly </a>
    </div>
   </div>
   <script>
@@ -2203,5 +2203,3 @@
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9ab9d04b477a9e12',t:'MTc2NTMzODk5OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
